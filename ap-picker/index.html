@@ -1,0 +1,42 @@
+<html>
+  <body style="margin: 0">
+    <img src="spectrum.jpg" usemap="#paintmap">
+    <map name="paintmap" id="paintmap">
+      <area shape="circle" coords="739,297,10" href="" title="Familiar Pink">
+      <area shape="circle" coords="742,517,10" href="" title="Carmine Dragon">
+      <area shape="circle" coords="22,303,10" href="" title="Poppy Red">
+      <area shape="circle" coords="29,282,10" href="" title="Bright Red">
+      <area shape="circle" coords="66,407,10" href="" title="Nuclear Sunrise">
+      <area shape="circle" coords="37,210,10" href="" title="Fire Drake">
+      <area shape="circle" coords="116,476,10" href="" title="Ancient Honey">
+      <area shape="circle" coords="127,496,10" href="" title="Maize Yellow">
+      <area shape="circle" coords="204,684,10" href="" title="Orc Skin">
+      <area shape="circle" coords="190,582,10" href="" title="Ghillie Dew">
+      <area shape="circle" coords="176,455,10" href="" title="Charming Chartreus">
+    </map>
+    <div id="overlay" style="       float: left;
+       position: absolute;
+       left: 0px;
+       top: 0px;">
+      <svg id="svg" width="800" height="800"></svg>
+    </div>
+    <script>
+      console.log("Generating overlay")
+      let map = document.getElementById("paintmap")
+      let svg = document.getElementById("svg")
+      for (let area of map.children) {
+        let coords = area.getAttribute("coords").split(",");
+        let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttributeNS(null, 'cx', coords[0]);
+        circle.setAttributeNS(null, 'cy', coords[1]);
+        circle.setAttributeNS(null, 'r', coords[2]);
+        circle.setAttributeNS(null, 'style', 'fill: solid; stroke: blue; stroke-width: 1px;');
+        circle.setAttributeNS(null, 'fill-opacity', '0.1');
+        circle.setAttributeNS(null, 'title', area.getAttribute("title"));
+        circle.innerHTML = "<title>" + area.getAttribute("title") + "</title>";
+
+        svg.appendChild(circle);
+      }
+    </script>
+  </body>
+</html>
